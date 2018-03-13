@@ -53,9 +53,13 @@ validate n = total `mod` 10 == 0
 
 -- EXERCISE 5
 -- Example: hanoi 2 "a" "b" "c" == [("a","c"), ("a","b"), ("c","b")]
---type Peg = String
---type Move = (Peg, Peg)
---hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+ --From A to B using C
+type Peg = String
+type Move = (Peg, Peg)
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi n a b c
+  | n > 0 = hanoi (n-1) a c b ++ [(a, b)] ++ hanoi (n-1) c b a
+  | otherwise = []
 
 
 myDrop :: Int -> [a] -> [a]
@@ -66,12 +70,6 @@ myDrop n xs
 lastButOne :: [a] -> a
 lastButOne (x:[]) = x
 lastButOne xs = last (init xs)
-
-
-fib :: Integer -> [Integer]
-fib 1 = [1]
-fib 2 = [2]
-fib n = fib (n) + fib (n - 1)
 
 
 
